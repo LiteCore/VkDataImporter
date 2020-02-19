@@ -1,0 +1,17 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VKDataImporter"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="VKDataImporter.LoginWindow"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="149.992" Width="314.104" ResizeBorderThickness="4,0,4,0">
+    <Grid>
+        <TextBox x:Name="textBox" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" mah:TextBoxHelper.Watermark="Логин"/>
+        <TextBox x:Name="textBox1" Height="23" Margin="10,41,10,0" TextWrapping="Wrap" VerticalAlignment="Top" mah:TextBoxHelper.Watermark="Пароль"/>
+        <Button x:Name="button" Content="Butt" VerticalAlignment="Bottom" Margin="0,0,10,8" HorizontalAlignment="Right" Width="39" Height="39"/>
+
+    </Grid>
+</Controls:MetroWindow>
