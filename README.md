@@ -8,5 +8,6 @@
 
 ## Используемые инструменты
 
-*  [VkNet](https://github.com/vknet/vk)
-*  [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
+* [VkNet](https://github.com/vknet/vk)
+* [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
+* [EPPlus](https://github.com/JanKallman/EPPlus)
