@@ -9,8 +9,6 @@
         mc:Ignorable="d"
         Title="Авторизация" Height="381" Width="657" Loaded="MetroWindow_Loaded" ResizeMode="NoResize">
     <Grid>
-
         <Controls1:WebView x:Name="webView" />
-
     </Grid>
 </Controls:MetroWindow>

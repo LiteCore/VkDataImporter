@@ -128,6 +128,7 @@ namespace VKDataImporter
 
         private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            SetState(false);
             SaveFileDialog saveFile = new SaveFileDialog()
             {
                 Filter = "XLSX|*.xlsx",
@@ -142,12 +143,20 @@ namespace VKDataImporter
                 progressBar.Maximum = x.Item2;
                 progressBar.Value = x.Item1;
             });
-            bool result = await DataImporter.ImportDataAsync(textBox.Text, saveFile.FileName, progress);
-            if(result)
-                new MessageWindow("Успех", "Данные успешно записаны").ShowDialog();
-            else
-                new MessageWindow("Неудача", "Не удалось записать данные").ShowDialog();
+            try
+            {
+                bool result = await DataImporter.ImportDataAsync(textBox.Text, saveFile.FileName, progress);
+                if (result)
+                    new MessageWindow("Успех", "Данные успешно записаны").ShowDialog();
+                else
+                    new MessageWindow("Неудача", "Не удалось записать данные").ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                new MessageWindow("Успех", ex.Message).ShowDialog();
+            }
             progressBar.Visibility = Visibility.Hidden;
+            SetState(true);
         }
 
         private void SettingButtons_Click(object sender, RoutedEventArgs e)
@@ -170,6 +179,15 @@ namespace VKDataImporter
                 Properties.Settings.Default.PrivateMessages = PrivateMessagesButton.IsChecked == null ? false : (bool)PrivateMessagesButton.IsChecked;
 
             }
+        }
+
+        private void SetState(bool state)
+        {
+            AutirizeButton.IsEnabled = state;
+            StartButton.IsEnabled = state;
+            DayOfBirthButton.IsEnabled = state;
+            CityButton.IsEnabled = state;
+            PrivateMessagesButton.IsEnabled = state;
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -206,10 +224,6 @@ namespace VKDataImporter
         {
             BrowserWindow window = new BrowserWindow();
             window.ShowDialog();
-            //if (window.ShowDialog() == true)
-            //{
-            //    Properties.Settings.Default.Token = Authorizator.Api.Token;
-            //}
         }
     }
     class WinTheme

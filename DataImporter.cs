@@ -34,7 +34,6 @@ namespace VKDataImporter
                     throw new Exception("Не удалось авторизироваться");
                 }
             }
-
             try
             {
                 GetDataAndWrite(group, path, progress);
@@ -43,8 +42,6 @@ namespace VKDataImporter
             {
                 throw new Exception(ex.Message);
             }
-
-            //ExcelWriter.WriteUserInfo(saveFile.FileName, users);
             return true;
         }
 
@@ -89,7 +86,7 @@ namespace VKDataImporter
                     for (int row = 0; row < users.Count; row++)
                     {
                         int cell = 0;
-                        int rowRes = row + 2 + (int)offset - (wsCounter - 1) * 10000;
+                        int rowRes = row + 2 + (int)offset - (wsCounter - 1) * 250000;
                         ws.Cells[rowRes, ++cell].Value = users[row].Id.ToString();
                         ws.Cells[rowRes, ++cell].Value = users[row].FirstName;
                         ws.Cells[rowRes, ++cell].Value = users[row].LastName;
@@ -104,7 +101,7 @@ namespace VKDataImporter
                     totalCount = users.TotalCount;
                     offset += 1000;
                     progress.Report(new Tuple<int, int>((int)offset, (int)totalCount));
-                    if(offset % 10000 == 0)
+                    if(offset % 250000 == 0)
                     {
                         ws = p.Workbook.Worksheets.Add($"Users{wsCounter}");
                         for (int field = 0; field < Fields.Count; field++)

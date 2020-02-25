@@ -14,7 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
-using Windows.UI.Xaml.Controls;
+using Microsoft.Toolkit.Wpf.UI.Controls;
+using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace VKDataImporter
 {
@@ -29,7 +30,7 @@ namespace VKDataImporter
             webView.NavigationCompleted += WebView_NavigationCompleted;
         }
 
-        private void WebView_NavigationCompleted(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs e)
+        private void WebView_NavigationCompleted(object sender, WebViewControlNavigationCompletedEventArgs e)
         {
             if (e.Uri.Fragment.Contains("access_token"))
             {
