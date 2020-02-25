@@ -1,0 +1,17 @@
+﻿<Controls:MetroWindow x:Class="VKDataImporter.AuthentificationCodeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VKDataImporter"
+        mc:Ignorable="d"
+        Title="Введите код аутентификатора" Height="108.572" Width="265.143" ResizeBorderThickness="4,0,4,0" MinWidth="300">
+    <Grid>
+        <Button x:Name="CancelButton" Content="Отмена" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" IsCancel="True"/>
+        <TextBox x:Name="TextBox" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Controls:TextBoxHelper.Watermark="Код аутентификации"/>
+        <Button x:Name="OkButton" Content="ОК" HorizontalAlignment="Right" Margin="0,0,90,10" VerticalAlignment="Bottom" Width="75" Click="OkButton_Click" IsDefault="True"/>
+
+    </Grid>
+</Controls:MetroWindow>

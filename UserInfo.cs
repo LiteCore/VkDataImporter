@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace VKDataImporter
 {
-    class User
+    class UserInfo
     {
-
     }
 }

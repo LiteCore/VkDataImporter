@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VKDataImporter"
         mc:Ignorable="d"
-        Title="VkDataImporter" Height="61" Width="702" MinWidth="625" MinHeight="95" Loaded="MetroWindow_Loaded" ResizeBorderThickness="4,0,4,0" ShowMaxRestoreButton="False" Closing="MetroWindow_Closing">
+        Title="VkDataImporter" Height="63" Width="702" MinWidth="625" MinHeight="95" Loaded="MetroWindow_Loaded" ResizeBorderThickness="4,0,4,0" ShowMaxRestoreButton="False" Closing="MetroWindow_Closing">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button x:Name="SettingsButton" Content="Настройки" Click="SettingsButton_Click" />
@@ -14,13 +14,14 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
-        <TextBox x:Name="textBox" Margin="10,10,60,0" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="Ссылка..." VerticalContentAlignment="Center" VerticalAlignment="Top" MinHeight="45"/>
-        <Button x:Name="button" Content="Butt" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" MinHeight="45" MinWidth="45" Click="StartButton_Click"/>
+        <Controls:MetroProgressBar x:Name="progressBar" Visibility="Hidden"/>
+        <TextBox x:Name="textBox" Margin="10,10,60,0" TextWrapping="Wrap" Controls:TextBoxHelper.Watermark="ID Группы" VerticalContentAlignment="Center" VerticalAlignment="Top" MinHeight="45"/>
+        <Button x:Name="StartButton" Content="Butt" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" MinHeight="45" MinWidth="45" Click="StartButton_Click"/>
         <Grid x:Name="SettingsGrid" Margin="10,60,10,10" VerticalAlignment="Top">
             <ToggleButton x:Name="DayOfBirthButton" Width="137" Height="28" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Дата рождения" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click"/>
             <ToggleButton x:Name="CityButton" Width="137" Height="28" Margin="10,43,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Город" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click"/>
-            <ToggleButton x:Name="FriendsButton" Width="137" Height="28" Margin="294,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Друзья" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click"/>
-            <ToggleButton x:Name="GroupsButton" Width="137" Height="28" Margin="152,43,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Группы" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click"/>
+            <ToggleButton x:Name="FriendsButton" Width="137" Height="28" Margin="294,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Друзья" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click" Visibility="Hidden"/>
+            <ToggleButton x:Name="GroupsButton" Width="137" Height="28" Margin="152,43,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Группы" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click" Visibility="Hidden"/>
             <ToggleButton x:Name="PrivateMessagesButton" Width="137" Height="28" Margin="152,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Доступность ЛС" d:LayoutOverrides="VerticalAlignment" Click="SettingButtons_Click"/>
             <ComboBox x:Name="ThemeComboBox" HorizontalAlignment="Right" Margin="0,11,0,0" Width="160" VerticalAlignment="Top" SelectionChanged="ThemeComboBox_SelectionChanged"/>
             <ComboBox x:Name="AccentComboBox" HorizontalAlignment="Right" Margin="0,42,0,0" Width="160" VerticalAlignment="Top" SelectionChanged="ColorComboBox_SelectionChanged"/>

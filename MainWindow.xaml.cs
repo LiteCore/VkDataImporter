@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using Application = System.Windows.Application;
 
 namespace VKDataImporter
 {
@@ -124,9 +126,28 @@ namespace VKDataImporter
             IsAnimated = false;
         }
 
-        private void StartButton_Click(object sender, RoutedEventArgs e)
+        private async void StartButton_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveFileDialog saveFile = new SaveFileDialog()
+            {
+                Filter = "XLSX|*.xlsx",
+                Title = "Укажите путь до Excel-документа"
+            };
+            if (saveFile.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+            progressBar.Value = 0;
+            progressBar.Visibility = Visibility.Visible;
+            Progress<Tuple<int, int>> progress = new System.Progress<Tuple<int, int>>((x) =>
+            {
+                progressBar.Maximum = x.Item2;
+                progressBar.Value = x.Item1;
+            });
+            bool result = await DataImporter.ImportDataAsync(textBox.Text, saveFile.FileName, progress);
+            if(result)
+                new MessageWindow("Успех", "Данные успешно записаны").ShowDialog();
+            else
+                new MessageWindow("Неудача", "Не удалось записать данные").ShowDialog();
+            progressBar.Visibility = Visibility.Hidden;
         }
 
         private void SettingButtons_Click(object sender, RoutedEventArgs e)
@@ -147,6 +168,7 @@ namespace VKDataImporter
                 Properties.Settings.Default.Friends = FriendsButton.IsChecked == null ? false : (bool)FriendsButton.IsChecked;
                 Properties.Settings.Default.Groups = GroupsButton.IsChecked == null ? false : (bool)GroupsButton.IsChecked;
                 Properties.Settings.Default.PrivateMessages = PrivateMessagesButton.IsChecked == null ? false : (bool)PrivateMessagesButton.IsChecked;
+
             }
         }
 
@@ -182,7 +204,12 @@ namespace VKDataImporter
 
         private void AutirizeButton_Click(object sender, RoutedEventArgs e)
         {
-
+            BrowserWindow window = new BrowserWindow();
+            window.ShowDialog();
+            //if (window.ShowDialog() == true)
+            //{
+            //    Properties.Settings.Default.Token = Authorizator.Api.Token;
+            //}
         }
     }
     class WinTheme

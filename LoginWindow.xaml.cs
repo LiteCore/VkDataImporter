@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace VKDataImporter
 {
@@ -24,6 +25,21 @@ namespace VKDataImporter
         public LoginWindow()
         {
             InitializeComponent();
+            LoginTextBox.Text = Properties.Settings.Default.Login;
+            PasswordTextBox.Text = Properties.Settings.Default.Password;
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Login = LoginTextBox.Text;
+            Properties.Settings.Default.Password = PasswordTextBox.Text;
+            if(Authorizator.Authorize(LoginTextBox.Text, PasswordTextBox.Text))
+            {
+                DialogResult = true;
+                this.Close();
+            }
+            DialogResult = false;
+            Properties.Settings.Default.Save();
         }
     }
 }
