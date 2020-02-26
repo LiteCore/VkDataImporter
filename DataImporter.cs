@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using VkNet.Model;
-using VkNet.Model.RequestParams;
-using VkNet.Enums.Filters;
-using VkNet.Utils;
-using OfficeOpenXml;
 
 namespace VKDataImporter
 {
-    static class DataImporter
+    internal static class DataImporter
     {
-        static public Task<bool> ImportDataAsync(string group, string path, IProgress<Tuple<int,int>> progress)
+        static public Task<bool> ImportDataAsync(string group, string path, IProgress<Tuple<int, int>> progress)
         {
             return Task.Run(() => ImportData(group, path, progress));
         }
+
         static public bool ImportData(string group, string path, IProgress<Tuple<int, int>> progress)
         {
             Authorizator.Authorize();
@@ -38,7 +33,7 @@ namespace VKDataImporter
             {
                 GetDataAndWrite(group, path, progress);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
@@ -53,14 +48,14 @@ namespace VKDataImporter
             int wsCounter = 1;
             using (var p = new ExcelPackage(new System.IO.FileInfo(path)))
             {
-                for(int i = p.Workbook.Worksheets.Count; i > 0; i--)
+                for (int i = p.Workbook.Worksheets.Count; i > 0; i--)
                 {
                     p.Workbook.Worksheets.Delete(i);
                 }
-                    
+
                 var ws = p.Workbook.Worksheets.Add("Users");
                 var settings = Properties.Settings.Default;
-                List<string> Fields = new List<string>()
+                List<string> Fields = new List<string>
                     {
                         "ID",
                         "Имя",
@@ -77,7 +72,7 @@ namespace VKDataImporter
 
                 do
                 {
-                    var users = _api.Groups.GetMembers(new GroupsGetMembersParams()
+                    var users = _api.Groups.GetMembers(new GroupsGetMembersParams
                     {
                         GroupId = group,
                         Fields = UsersFields.CanWritePrivateMessage | UsersFields.City | UsersFields.BirthDate | UsersFields.Sex,
@@ -92,16 +87,22 @@ namespace VKDataImporter
                         ws.Cells[rowRes, ++cell].Value = users[row].LastName;
                         ws.Cells[rowRes, ++cell].Value = users[row].Sex.ToString();
                         if (settings.DayOfBirth)
+                        {
                             ws.Cells[rowRes, ++cell].Value = users[row].BirthDate ?? "";
+                        }
                         if (settings.City)
+                        {
                             ws.Cells[rowRes, ++cell].Value = users[row].City == null ? "" : users[row].City.Title;
+                        }
                         if (settings.PrivateMessages)
+                        {
                             ws.Cells[rowRes, ++cell].Value = users[row].CanWritePrivateMessage;
+                        }
                     }
                     totalCount = users.TotalCount;
                     offset += 1000;
                     progress.Report(new Tuple<int, int>((int)offset, (int)totalCount));
-                    if(offset % 250000 == 0)
+                    if (offset % 250000 == 0)
                     {
                         ws = p.Workbook.Worksheets.Add($"Users{wsCounter}");
                         for (int field = 0; field < Fields.Count; field++)

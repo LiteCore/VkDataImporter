@@ -18,7 +18,7 @@ namespace VKDataImporter
     /// <summary>
     /// Логика взаимодействия для MessageWindow.xaml
     /// </summary>
-    public partial class MessageWindow : MetroWindow
+    public class MessageWindow : MetroWindow
     {
         public MessageWindow(string title, string text)
         {

@@ -1,22 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
 using System.Windows.Media.Animation;
-using MahApps.Metro.Controls;
-using MahApps.Metro;
 using Application = System.Windows.Application;
 
 namespace VKDataImporter
@@ -24,17 +11,17 @@ namespace VKDataImporter
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public class MainWindow : MetroWindow
     {
         public MainWindow()
         {
             InitializeComponent();
             SetStyle(ThemeManager.GetAppTheme(Properties.Settings.Default.Theme), ThemeManager.GetAccent(Properties.Settings.Default.Accent));
         }
-        DoubleAnimation windowHeightAnimation;
-        bool IsMaximized = true;
-        bool IsAnimated = false;
-        //bool IsLoaded = false;
+
+        private DoubleAnimation windowHeightAnimation;
+        private bool IsMaximized = true;
+        private bool IsAnimated = false;
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +39,9 @@ namespace VKDataImporter
                 windowHeightAnimation.From = this.Height;
                 windowHeightAnimation.To = IsMaximized ? this.Height + 85 : this.Height - 85;
                 if (IsMaximized)
+                {
                     SettingsGrid.Visibility = Visibility.Visible;
+                }
                 BeginAnimation(HeightProperty, windowHeightAnimation);
             }
         }
@@ -62,49 +51,49 @@ namespace VKDataImporter
             windowHeightAnimation = new DoubleAnimation
             {
                 Duration = TimeSpan.FromSeconds(0.6d),
-                EasingFunction = new QuarticEase()
+                EasingFunction = new QuarticEase
                 {
                     EasingMode = EasingMode.EaseInOut
                 }
             };
             windowHeightAnimation.Completed += WindowHeightAnimation_Completed;
 
-            List<WinTheme> themes = new List<WinTheme>()
+            List<WinTheme> themes = new List<WinTheme>
             {
-                new WinTheme(){ Name = "Dark", AppTheme = ThemeManager.GetAppTheme("BaseDark") },
-                new WinTheme(){ Name = "Light", AppTheme = ThemeManager.GetAppTheme("BaseLight") }
+                new WinTheme{ Name = "Dark", AppTheme = ThemeManager.GetAppTheme("BaseDark") },
+                new WinTheme{ Name = "Light", AppTheme = ThemeManager.GetAppTheme("BaseLight") }
             };
             ThemeComboBox.ItemsSource = themes;
             ThemeComboBox.DisplayMemberPath = "Name";
             ThemeComboBox.SelectedValuePath = "AppTheme";
             ThemeComboBox.SelectedValue = ThemeManager.DetectAppStyle(Application.Current).Item1;
 
-            List<WinAccent> accents = new List<WinAccent>()
+            List<WinAccent> accents = new List<WinAccent>
             {
-                new WinAccent(){ Name = "Blue", AppAccent = ThemeManager.GetAccent("Blue") },
-                new WinAccent(){ Name = "Red", AppAccent = ThemeManager.GetAccent("Red") },
-                new WinAccent(){ Name = "Green", AppAccent = ThemeManager.GetAccent("Green") },
-                new WinAccent(){ Name = "Purple", AppAccent = ThemeManager.GetAccent("Purple") },
-                new WinAccent(){ Name = "Orange", AppAccent = ThemeManager.GetAccent("Orange") },
-                new WinAccent(){ Name = "Lime", AppAccent = ThemeManager.GetAccent("Lime") },
-                new WinAccent(){ Name = "Emerald", AppAccent = ThemeManager.GetAccent("Emerald") },
-                new WinAccent(){ Name = "Teal", AppAccent = ThemeManager.GetAccent("Teal") },
-                new WinAccent(){ Name = "Cyan", AppAccent = ThemeManager.GetAccent("Cyan") },
-                new WinAccent(){ Name = "Cobalt", AppAccent = ThemeManager.GetAccent("Cobalt") },
-                new WinAccent(){ Name = "Indigo", AppAccent = ThemeManager.GetAccent("Indigo") },
-                new WinAccent(){ Name = "Violet", AppAccent = ThemeManager.GetAccent("Violet") },
-                new WinAccent(){ Name = "Pink", AppAccent = ThemeManager.GetAccent("BaseLight") },
-                new WinAccent(){ Name = "Magenta", AppAccent = ThemeManager.GetAccent("MagPinkenta") },
-                new WinAccent(){ Name = "Crimson", AppAccent = ThemeManager.GetAccent("Crimson") },
-                new WinAccent(){ Name = "Amber", AppAccent = ThemeManager.GetAccent("Amber") },
-                new WinAccent(){ Name = "Yellow", AppAccent = ThemeManager.GetAccent("Yellow") },
-                new WinAccent(){ Name = "Brown", AppAccent = ThemeManager.GetAccent("Brown") },
-                new WinAccent(){ Name = "Yellow", AppAccent = ThemeManager.GetAccent("Yellow") },
-                new WinAccent(){ Name = "Olive", AppAccent = ThemeManager.GetAccent("Olive") },
-                new WinAccent(){ Name = "Steel", AppAccent = ThemeManager.GetAccent("Steel") },
-                new WinAccent(){ Name = "Mauve", AppAccent = ThemeManager.GetAccent("Mauve") },
-                new WinAccent(){ Name = "Taupe", AppAccent = ThemeManager.GetAccent("Taupe") },
-                new WinAccent(){ Name = "Sienna", AppAccent = ThemeManager.GetAccent("Sienna") }
+                new WinAccent{ Name = "Blue", AppAccent = ThemeManager.GetAccent("Blue") },
+                new WinAccent{ Name = "Red", AppAccent = ThemeManager.GetAccent("Red") },
+                new WinAccent{ Name = "Green", AppAccent = ThemeManager.GetAccent("Green") },
+                new WinAccent{ Name = "Purple", AppAccent = ThemeManager.GetAccent("Purple") },
+                new WinAccent{ Name = "Orange", AppAccent = ThemeManager.GetAccent("Orange") },
+                new WinAccent{ Name = "Lime", AppAccent = ThemeManager.GetAccent("Lime") },
+                new WinAccent{ Name = "Emerald", AppAccent = ThemeManager.GetAccent("Emerald") },
+                new WinAccent{ Name = "Teal", AppAccent = ThemeManager.GetAccent("Teal") },
+                new WinAccent{ Name = "Cyan", AppAccent = ThemeManager.GetAccent("Cyan") },
+                new WinAccent{ Name = "Cobalt", AppAccent = ThemeManager.GetAccent("Cobalt") },
+                new WinAccent{ Name = "Indigo", AppAccent = ThemeManager.GetAccent("Indigo") },
+                new WinAccent{ Name = "Violet", AppAccent = ThemeManager.GetAccent("Violet") },
+                new WinAccent{ Name = "Pink", AppAccent = ThemeManager.GetAccent("BaseLight") },
+                new WinAccent{ Name = "Magenta", AppAccent = ThemeManager.GetAccent("MagPinkenta") },
+                new WinAccent{ Name = "Crimson", AppAccent = ThemeManager.GetAccent("Crimson") },
+                new WinAccent{ Name = "Amber", AppAccent = ThemeManager.GetAccent("Amber") },
+                new WinAccent{ Name = "Yellow", AppAccent = ThemeManager.GetAccent("Yellow") },
+                new WinAccent{ Name = "Brown", AppAccent = ThemeManager.GetAccent("Brown") },
+                new WinAccent{ Name = "Yellow", AppAccent = ThemeManager.GetAccent("Yellow") },
+                new WinAccent{ Name = "Olive", AppAccent = ThemeManager.GetAccent("Olive") },
+                new WinAccent{ Name = "Steel", AppAccent = ThemeManager.GetAccent("Steel") },
+                new WinAccent{ Name = "Mauve", AppAccent = ThemeManager.GetAccent("Mauve") },
+                new WinAccent{ Name = "Taupe", AppAccent = ThemeManager.GetAccent("Taupe") },
+                new WinAccent{ Name = "Sienna", AppAccent = ThemeManager.GetAccent("Sienna") }
             };
             AccentComboBox.ItemsSource = accents;
             AccentComboBox.DisplayMemberPath = "Name";
@@ -121,7 +110,9 @@ namespace VKDataImporter
         private void WindowHeightAnimation_Completed(object sender, EventArgs e)
         {
             if (!IsMaximized)
+            {
                 SettingsGrid.Visibility = Visibility.Hidden;
+            }
             IsMaximized = !IsMaximized;
             IsAnimated = false;
         }
@@ -135,7 +126,9 @@ namespace VKDataImporter
                 Title = "Укажите путь до Excel-документа"
             };
             if (saveFile.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            {
                 return;
+            }
             progressBar.Value = 0;
             progressBar.Visibility = Visibility.Visible;
             Progress<Tuple<int, int>> progress = new System.Progress<Tuple<int, int>>((x) =>
@@ -147,11 +140,15 @@ namespace VKDataImporter
             {
                 bool result = await DataImporter.ImportDataAsync(textBox.Text, saveFile.FileName, progress);
                 if (result)
+                {
                     new MessageWindow("Успех", "Данные успешно записаны").ShowDialog();
+                }
                 else
+                {
                     new MessageWindow("Неудача", "Не удалось записать данные").ShowDialog();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 new MessageWindow("Успех", ex.Message).ShowDialog();
             }
@@ -177,7 +174,6 @@ namespace VKDataImporter
                 Properties.Settings.Default.Friends = FriendsButton.IsChecked == null ? false : (bool)FriendsButton.IsChecked;
                 Properties.Settings.Default.Groups = GroupsButton.IsChecked == null ? false : (bool)GroupsButton.IsChecked;
                 Properties.Settings.Default.PrivateMessages = PrivateMessagesButton.IsChecked == null ? false : (bool)PrivateMessagesButton.IsChecked;
-
             }
         }
 
@@ -190,7 +186,7 @@ namespace VKDataImporter
             PrivateMessagesButton.IsEnabled = state;
         }
 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private static void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Properties.Settings.Default.Save();
         }
@@ -226,12 +222,14 @@ namespace VKDataImporter
             window.ShowDialog();
         }
     }
-    class WinTheme
+
+    internal class WinTheme
     {
         public string Name { get; set; }
         public MahApps.Metro.AppTheme AppTheme { get; set; }
     }
-    class WinAccent
+
+    internal class WinAccent
     {
         public string Name { get; set; }
         public MahApps.Metro.Accent AppAccent { get; set; }

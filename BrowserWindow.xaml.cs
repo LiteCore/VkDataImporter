@@ -1,28 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MahApps.Metro.Controls;
-using MahApps.Metro;
-using Microsoft.Toolkit.Wpf.UI.Controls;
-using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace VKDataImporter
 {
     /// <summary>
     /// Логика взаимодействия для BrowserWindow.xaml
     /// </summary>
-    public partial class BrowserWindow : MetroWindow
+    public class BrowserWindow : MetroWindow
     {
         public BrowserWindow()
         {
@@ -46,13 +30,7 @@ namespace VKDataImporter
 
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //await Dispatcher.InvokeAsync(async() =>
-            //{
-            //    await WebView.ClearTemporaryWebDataAsync();
-            //});
-            //webView.Refresh();
             webView.Navigate(@"https://oauth.vk.com/authorize?client_id=7331234&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=0&response_type=token&v=5.52&revoke=1");
-
         }
     }
 }
