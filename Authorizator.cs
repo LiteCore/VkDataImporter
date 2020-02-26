@@ -1,4 +1,7 @@
-﻿namespace VKDataImporter
+﻿using VkNet;
+using VkNet.Model;
+
+namespace VKDataImporter
 {
     internal static class Authorizator
     {

@@ -1,12 +1,16 @@
 ﻿using System.Linq;
 using System.Windows;
+using MahApps.Metro;
+using MahApps.Metro.Controls;
+using Microsoft.Toolkit.Wpf.UI.Controls;
+using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace VKDataImporter
 {
     /// <summary>
     /// Логика взаимодействия для BrowserWindow.xaml
     /// </summary>
-    public class BrowserWindow : MetroWindow
+    public partial class BrowserWindow : MetroWindow
     {
         public BrowserWindow()
         {

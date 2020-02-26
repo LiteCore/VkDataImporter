@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
+using MahApps.Metro;
+using MahApps.Metro.Controls;
 using Application = System.Windows.Application;
 
 namespace VKDataImporter
@@ -11,7 +13,7 @@ namespace VKDataImporter
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public class MainWindow : MetroWindow
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
@@ -127,6 +129,7 @@ namespace VKDataImporter
             };
             if (saveFile.ShowDialog() != System.Windows.Forms.DialogResult.OK)
             {
+                SetState(true);
                 return;
             }
             progressBar.Value = 0;
@@ -186,7 +189,7 @@ namespace VKDataImporter
             PrivateMessagesButton.IsEnabled = state;
         }
 
-        private static void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Properties.Settings.Default.Save();
         }
